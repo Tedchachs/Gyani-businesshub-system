@@ -271,7 +271,7 @@
   .modal_wrapper.active {
     visibility: visible;
   }
-  
+
   .modal_wrapper.active .shadow {
     opacity: 1;
   }
