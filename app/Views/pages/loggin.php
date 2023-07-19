@@ -160,6 +160,7 @@
 
     </body>
 
+    <!-- custom script -->
     <script src="js/gyani.js"></script>
     <!-- imported icons scripts -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
