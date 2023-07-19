@@ -206,7 +206,6 @@
   .wrapper .btns_wrap .common_btns button.btn_back{
     background: var(--tertiary-color);
   }
-
   .wrapper .btns_wrap .common_btns button.btn_next .icon{
     display: flex;
     margin-left: 10px;
