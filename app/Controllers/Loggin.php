@@ -2,8 +2,23 @@
 
 namespace App\Controllers;
 
+use App\Controllers\BaseController;
+use App\Models\LogginModel;
+use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\ResponseInterface;
+use Psr\Log\LoggerInterface;
+
 class Loggin extends BaseController
 {
+    protected $logginModel;
+
+    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
+    {
+        parent::initController($request, $response, $logger);
+
+        $this->logginModel = new LogginModel();
+    }
+
     public function index()
     {
         return view('pages/loggin');
@@ -11,29 +26,36 @@ class Loggin extends BaseController
 
     public function save()
     {
-        //include helper form
-        helper(['form']);
-        //set rules validation form
-        $rules = [
-            'email_address'    => 'required|min_length[6]|max_length[50]|valid_email|is_unique[users.email_address]',
-            'password'         => 'required|min_length[6]|max_length[200]',
-            'confirm_password' => 'matches[password]'
+        $hashed_password= password_hash($this->request->getVar('confirm password'),PASSWORD_BCRYPT);
+        $email = $this->request->getPost('address');
+        $userName= $this->request->getPost('user_name');
+        $fname = $this->request->getPost('first_name');
+        $lname = $this->request->getPost('last_name');
+        $company = $this->request->getPost('current_company');
+        $experience = $this->request->getPost('total_experience');
+        $desig= $this->request->getPost('designation');
+
+        $data = [
+            'email' => $email,
+            'password' =>$hashed_password,
+            'user_name' => $userName,
+            'first_name' => $fname,
+            'last_name' => $lname,
+            'company' => $company,
+            'experience' => $experience,
+            'designation' => $desig
         ];
 
-        if($this->validate($rules)){
-            $model = new UserModel();
+        var_dump($data);
+        exit();
 
-            $data = [
-                'email_address' => $this->request->getVar('email_address'),
-                'password'      => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
-            ];
-
-            $model->save($data);
-            return redirect()->to('/loggin');
+        if($this->logginModel->save($data)){
+            return json_encode(['status'=>true,'message'=>'User saved successfully']);
         }else{
-            $data['validation'] = $this->validator;
-            echo view('pages/loggin', $data);
+            return var_dump($this->logginModel->errors());
         }
+
+        // return redirect()->to('/loggin');
     }
 
     public function signup()

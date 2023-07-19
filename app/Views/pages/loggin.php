@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- customized styles -->
-        <link rel="stylesheet" href="styles/login_gyani.css" type="text/css">
+        <link rel="stylesheet" href="public/styles/login_gyani.css" type="text/css">
    
     </head>
 
@@ -39,13 +39,13 @@
             </div>
 
             <div class="form_wrap">
-                <div class="form_1 data_info">
+                <div class="form_1 data_info active">
                     <h2>Signup info</h2>
 
-                    <form action="POST" method="Loggin">
+                    <form >
                         <div class="form_container">
                             <div class="input_wrap">
-                                <label for="name">Email Address</label>
+                                <label for="email_address">Email Address</label>
                                 <input type="text" name="Email address" id="email_address" placeholder="Email...">
                             </div>
 
@@ -66,7 +66,7 @@
                 <div class="form_2 data_info">
                     <h2>Person info</h2>
 
-                    <form>
+                    <form >
                         <div class="form_container">
                             <div class="input_wrap">
                                 <label for="user_name">User Name</label>
@@ -99,12 +99,12 @@
 
                             <div class="input_wrap">
                                 <label for="total_experience">Total Experience</label>
-                                <input type="text" name="First Name" id="total_experience">
+                                <input type="text" name="Total Experience" id="total_experience">
                             </div>
 
                             <div class="input_wrap">
                                 <label for="designation">Designation</label>
-                                <input type="text" name="Last Name" id="designation">
+                                <input type="text" name="Designation" id="designation">
                             </div>
                         </div>
                     </form>
@@ -149,7 +149,7 @@
 
         </div>
 
-        <div class="modal_wrapper">
+        <div class="modal_wrapper" id="modal_wrapper">
             <div class="shadow">
                 <div class="success_wrap">
                     <span class="modal_icon"><ion-icon name="checkmark-done-outline"></ion-icon></span>
@@ -161,7 +161,7 @@
     </body>
 
     <!-- custom script -->
-    <script src="js/gyani.js"></script>
+    <script src="public/js/gyani.js"></script>
     <!-- imported icons scripts -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
