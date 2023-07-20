@@ -6,6 +6,8 @@ class Home extends BaseController
 {
     public function index()
     {
-        return view('pages/loggin');
+        return view('pages/register');
     }
+
+    
 }

@@ -1,3 +1,4 @@
+// Navigation buttons scripts
 var form_1 = document.querySelector(".form_1");
 var form_2 = document.querySelector(".form_2");
 var form_3 = document.querySelector(".form_3");
@@ -59,112 +60,72 @@ var form_3_progressbar = document.querySelector(".form_3_progressbar");
         form_2_progressbar.classList.add("active");
     });
 
-    $(document).ready(function () {
-        // Handle "Next" button click
-        $('.btn_next').click(function () {
-            const activeForm = $('.data_info.active');
-            const nextForm = activeForm.next('.data_info');
+    // Submission of the form data script
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector('.wrapper');
+        const modal_wrapper = document.getElementById('modal_wrapper');
+        const shadow = document.querySelector('.shadow');
     
-            if (nextForm.length !== 0) {
-                activeForm.removeClass('active');
-                nextForm.addClass('active');
-            }
-    
-            updateButtonVisibility();
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            submitFormData(this);
         });
     
-        // Handle "Previous" button click
-        $('.btn_back').click(function () {
-            const activeForm = $('.data_info.active');
-            const prevForm = activeForm.prev('.data_info');
-    
-            if (prevForm.length !== 0) {
-                activeForm.removeClass('active');
-                prevForm.addClass('active');
-            }
-    
-            updateButtonVisibility();
-        });
-    
-        // Handle "Submit" button click
-        $('.btn_done').click(function () {
-            submitFormData();
-        });
-    
-        // Function to update button visibility based on active form
-        function updateButtonVisibility() {
-            const activeForm = $('.data_info.active');
-            $('.common_btns').hide();
-            if (activeForm.hasClass('form_1')) {
-                $('.form_1_btns').show();
-            } else if (activeForm.hasClass('form_2')) {
-                $('.form_2_btns').show();
-            } else if (activeForm.hasClass('form_3')) {
-                $('.form_3_btns').show();
-            }
-        }
-    
-        // Function to handle form submission
-        function submitFormData() {
-            const formData = new FormData();
-            const forms = $('form');
-    
-            forms.each(function (index, form) {
-                const formFields = new FormData(form);
-                for (const pair of formFields.entries()) {
-                    formData.append(pair[0], pair[1]);
-                }
-            });
-    
+        function submitFormData(form) {
+            const formData = new FormData(form);
             $.ajax({
-                url: "loggin/save",
-                method: 'POST',
+                url: 'register/save',
+                type: "POST",
                 data: formData,
+                dataType: "JSON",
                 processData: false,
                 contentType: false,
                 success: function (data) {
-                    console.log(data);
-                    // Assuming the server returns a success message, you can show the modal
-                    if (data.success) {
-                        $('#modal_wrapper').addClass("active");
+                    if (data.status) {
+                        modal_wrapper.classList.add("active");
+                        shadow.classList.add("active");
+    
+                        setTimeout(function () {
+                            window.location.href = baseUrl + 'login'; 
+                        }, 5000);
                     } else {
-                        $('#modal_wrapper').removeClass("active");
+                        window.location.href = baseUrl + 'register';
                     }
                 },
                 error: function (error) {
-                    console.log(error); // Log the error to the console (for debugging)
-                    alert('Ajax has failed to submit the form data. Please contact the administrator.'); // Show an alert to the user
+                    console.error("Failed to submit the form data.");
+                    alert("AJAX has failed to submit the form data. Please contact the administrator.");
                 }
             });
         }
     });
-    
 
-    // btn_done.addEventListener("click", function () {
-    //     submitFormData();
-    //     modal_wrapper.classList.add("active");
-    // });
+    // eye-off-outline and eye-outline icons script
 
-    shadow.addEventListener("click", function () {
-        modal_wrapper.classList.remove("active");
-    });
+    document.addEventListener("DOMContentLoaded", function () {
+        var password = document.getElementById("password");
+        var confirm_password = document.getElementById("confirm_password");
+        var togglePassword = document.getElementById("togglePassword");
+        var toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
 
-    function showPassword() {
-        var x = document.getElementById("password");
-        var y = document.getElementById("confirm password");
-        if (x.type === "password" && y.type === "password") {
-            x.type = "text";
-            y.type = "text";
-        } else {
-            x.type = "password";
-            y.type = "password";
+        togglePassword.addEventListener("click", function () {
+            showPassword(password);
+        });
+
+        toggleConfirmPassword.addEventListener("click", function () {
+            showPassword(confirm_password);
+        });
+
+        function showPassword(input) {
+            if (input.type === "password") {
+                input.type = "text";
+                togglePassword.setAttribute("name", "eye-off-outline");
+                toggleConfirmPassword.setAttribute("name", "eye-off-outline");
+            } else {
+                input.type = "password";
+                togglePassword.setAttribute("name", "eye-outline");
+                toggleConfirmPassword.setAttribute("name", "eye-outline");
+            }
         }
-    }
 
-    
-
-
-    
-  
-
-
+    });

@@ -8,7 +8,7 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
-class Loggin extends BaseController
+class Register extends BaseController
 {
     protected $logginModel;
 
@@ -21,13 +21,13 @@ class Loggin extends BaseController
 
     public function index()
     {
-        return view('pages/loggin');
+        return view('pages/register');
     }
 
     public function save()
     {
         $hashed_password= password_hash($this->request->getVar('confirm password'),PASSWORD_BCRYPT);
-        $email = $this->request->getPost('address');
+        $email = $this->request->getPost('email_address');
         $userName= $this->request->getPost('user_name');
         $fname = $this->request->getPost('first_name');
         $lname = $this->request->getPost('last_name');
@@ -46,25 +46,17 @@ class Loggin extends BaseController
             'designation' => $desig
         ];
 
-        var_dump($data);
-        exit();
 
-        if($this->logginModel->save($data)){
-            return json_encode(['status'=>true,'message'=>'User saved successfully']);
-        }else{
-            return var_dump($this->logginModel->errors());
+        if($this->logginModel->save($data))
+        {
+            return json_encode(['status'=>true,'message'=>'User Registered Successfully']);
+        }
+        else
+        {
+            return json_encode(['status'=>false,'message'=>'User Registration Failed']);
         }
 
-        // return redirect()->to('/loggin');
+        // return view('pages/login');
     }
 
-    public function signup()
-    {
-        $data = [
-            'title' => 'Signup',
-            'validation' => \Config\Services::validation()
-        ];
-
-        return view('pages/home', $data);
-    }
 }
