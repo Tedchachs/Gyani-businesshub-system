@@ -12,6 +12,7 @@
     </head>
 
     <body>
+
         <h3 class="reg">REGISTRATION FORM</h3>
 
         <form action="<?= base_url('register/save')?>" method="post" class="wrapper">
@@ -124,12 +125,11 @@
                         <span class="icon"><ion-icon name="arrow-back-outline"></ion-icon></span>
                     </button>
 
-                    <button type="submit" class="btn_done">
-                        Submit
-                    </button>
                 </div>
-
-
+                
+                <button type="submit" class="btn_done">
+                        Submit
+                </button>
 
             </div>
 
@@ -148,6 +148,7 @@
     </body>
 
 </html>
+
 
     <!-- custom script -->
     <script src="public/js/gyani.js"></script>

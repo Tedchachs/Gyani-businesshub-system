@@ -200,8 +200,9 @@
   }
 
   .common_btns button.btn_back{
-    background: var(--tertiary-color);
+    background: #018f7000; 
   }
+
   .data_info .common_btns button.btn_next .icon{
     display: flex;
     margin-left: 10px;
@@ -220,7 +221,7 @@
   .data_info .common_btns button.btn_back:hover{
     background: var(--previous-btn-hover);
   }
-
+  
   .password_input_wrap {
     position: relative;
   }
