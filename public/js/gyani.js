@@ -19,7 +19,6 @@ var shadow = document.querySelector(".shadow");
 var form_2_progressbar = document.querySelector(".form_2_progressbar");
 var form_3_progressbar = document.querySelector(".form_3_progressbar");
 
-
     form_1_next_btn.addEventListener("click", function () {
         form_1.style.display="none";
         form_2.style.display="block";
